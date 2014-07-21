@@ -138,6 +138,12 @@ class SiteController extends Controller
      */
     public function editCommentAction(Request $request, Comment $comment)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        if (!($user instanceof User) || $comment->getAuthor() != $user) {
+            throw new AccessDeniedException();
+        }
+
         $form = $this->createForm(new CommentType(), $comment);
 
         $form->handleRequest($request);
