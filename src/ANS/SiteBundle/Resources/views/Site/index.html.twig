@@ -1,0 +1,46 @@
+{% extends 'ANSSiteBundle::layout.html.twig' %}
+
+{% block body %}
+    {% if facebook is defined %}
+        <p><a href="{{ facebook.loginUrl({ redirect_uri: url('ans_site_site_login') }) }}">Войти через Facebook</a></p>
+    {% elseif friends is defined %}
+        <h3>Добро пожаловать, {{ app.user.name }}!</h3>
+        
+        <p>
+            <a href="{{ path('ans_site_site_profile') }}">Изменить профиль</a> | 
+            <a href="#add-comment" data-action-url="{{ path('ans_site_site_addcomment') }}">Написать комментарий</a> | 
+            <a href="{{ path('logout') }}">Выйти</a>
+        </p>
+
+        <div class="add-form"></div>
+
+        {% if friends.data|length > 0 %}
+            <h4>Список друзей:</h4>
+            <p>
+                {% for friend in friends.data %}
+                    {{ friend.name ~ (loop.last ? '.' : ', ') }}
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        {% if comments|length > 0 %}
+            <h4>Список комментариев:</h4>
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <small>Автор - {{ comment.author.name }}</small><br>
+                        <p>{{ comment.text|nl2br }}</p>
+
+                        {% if app.user == comment.author %}
+                            <a href="#edit-comment" 
+                               data-action-url="{{ path('ans_site_site_editcomment', { id: comment.id }) }}">
+                                Изменить
+                            </a>
+                            <div class="edit-form"></div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}

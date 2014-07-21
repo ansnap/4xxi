@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Website</title>
+
+        {% javascripts 
+			'bundles/anssite/js/jquery-2.1.1.min.js'
+			'bundles/anssite/js/script.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% stylesheets
+			'bundles/anssite/css/style.css'
+			filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    </head>
+
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

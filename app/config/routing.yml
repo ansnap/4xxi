@@ -1,0 +1,8 @@
+ans_site:
+    resource: "@ANSSiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+logout:
+    path: /logout
+

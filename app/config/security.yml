@@ -1,0 +1,26 @@
+security:
+    encoders:
+        ANS\SiteBundle\Entity\User:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
+
+    providers:
+        main:
+            entity:
+                class: ANS\SiteBundle\Entity\User
+                property: email
+
+    firewalls:
+        main:
+            pattern:	^/
+            anonymous:	~
+            logout:
+                path:   /logout
+                target: /
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

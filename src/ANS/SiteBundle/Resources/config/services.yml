@@ -1,0 +1,12 @@
+parameters:
+    facebook.appId: 1487917904752920
+    facebook.secret: 3879d7c1e7e3c20c0056d5d634da6c72
+
+services:
+    facebook:
+        class: ANS\SiteBundle\OAuth\Facebook\Facebook
+        arguments: [{ appId: %facebook.appId%, secret: %facebook.secret% }]
+
+
+
+        
